@@ -12,13 +12,13 @@ app.use(bodyParser.json());
 app.use(Express.static(path.join(__dirname, "../public")));
 
 const db = require('../database/database.js');
-Promise.promisifyAll(require('mongoose'));
 
-//gets the top five songs by listens
+// gets the top five songs by listens
 app.get('/songs', (req, res) => {
   console.log('I got a get for top 5');
   db.getTopFive()
     .then((songs) => {
+      console.log(songs)
       //console.log('I got the images back', data)
       const imageQueries = songs.map((song) => {
         //return the query for the album art

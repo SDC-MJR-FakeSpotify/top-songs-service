@@ -43,9 +43,6 @@ class TopFiveSongs extends React.Component {
       })
   }
 
-
-
-
   //places a popular header on div, and calls TopSongs with the whole array
   render() {
     if (this.state.isLoaded) {
