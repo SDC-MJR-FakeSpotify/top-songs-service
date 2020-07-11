@@ -22,7 +22,7 @@ app.get('/songs', (req, res) => {
       //console.log('I got the images back', data)
       const imageQueries = songs.map((song) => {
         //return the query for the album art
-        return db.getAlbumImage(song.albumId)
+        return db.getAlbumImage(song.album_id)
       })
       Promise.all(imageQueries)
         .then((albums) => {
