@@ -8,9 +8,8 @@ const Promise = require('bluebird');
 const morgan = require('morgan');
 
 require('../database/postgresConfig.js');
-const model = require('../database/models/pgModels.js');
 const pgController = require('./controllers/pgController.js');
-const seed = require('../database/mockData/dataSeed.js');
+// const seed = require('../database/mockData/dataSeed.js');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -19,34 +18,10 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use(morgan('dev'));
 
 //generate csv files for data seeding. Implement in steps of 3 million songs
-app.post('/data-generation', (req, res) => {
-  seed.generateSeed(10000000);
-  res.send('Data generated...');
-})
-
-//pg routes for benchmarking
-app.get('/pg/artists', (req, res) => {
-  let rand = Math.floor(Math.random() * (66737- 48000) + 48000)
-  pgController.getArtistQuery(rand, (err, data) => {
-    if (err) {
-      res.send(err)
-    } else {
-      res.json(data)
-    }
-  })
-})
-
-app.get('/pg/albums', (req, res) => {
-  let rand = Math.floor(Math.random() * (400008 - 300000) + 300000)
-  pgController.getAlbumQuery(rand, (err, data) => {
-    if (err) {
-      res.send(err)
-    } else {
-      res.json(data)
-      res.end()
-    }
-  })
-})
+// app.post('/data-generation', (req, res) => {
+//   seed.generateSeed(10000000);
+//   res.send('Data generated...');
+// })
 
 app.get('/pg/songs', (req, res) => {
   let rand = Math.floor(Math.random() * (10000000- 7500000) + 7500000)
@@ -60,9 +35,9 @@ app.get('/pg/songs', (req, res) => {
   })
 })
 
-app.get('/top-songs', (req, res) => {
+app.get('/getSongs', (req, res) => {
   //rand based off of artist ids
-  let rand = Math.floor(Math.random() * (400008 - 0) + 0) //albums
+  let rand = Math.floor(Math.random() * (588284 - 0) + 0) //albums
   // let rand = Math.floor(Math.random() * (66737- 48000) + 48000)
   pgController.getTopFive(rand, (err, data) => {
     if (err) {
@@ -72,16 +47,6 @@ app.get('/top-songs', (req, res) => {
     }
   })
 })
-
-// Get function to initially work through returning an image url by song
-// app.get('/songs/addImage', (req, res) => {
-//   // console.log('I got a get from: ', req.params.AlbumId);.
-//   db.getSong(req.params.SongId)
-//     .then((data) => {
-//       res.send(data)
-//     })
-//     .catch(err => console.log(err))
-// })
 
 const PORT = process.env.PORT || 3000;
 

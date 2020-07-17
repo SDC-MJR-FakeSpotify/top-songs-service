@@ -68,7 +68,7 @@ const sequelize = require('../postgresConfig.js');
 
 // console.log("Album model configured: ", Album === sequelize.models.Album);
 
-const Song = sequelize.define('song', {
+const Song = sequelize.define('songs', {
   song_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -112,8 +112,6 @@ const Song = sequelize.define('song', {
     allowNull: false
   },
 });
-
-// sequelize.sync({force:true})
 
 module.exports = {
   // Artist: Artist,

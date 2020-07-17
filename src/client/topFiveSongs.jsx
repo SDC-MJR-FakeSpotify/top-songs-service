@@ -32,7 +32,7 @@ class TopFiveSongs extends React.Component {
   // currently works to load images but is not async
   componentDidMount() {
     // artist ID goes here, currently staticly rendering one artist
-    fetch("http://localhost:3000/pg/top-songs")
+    fetch("http://localhost:3000/getSongs")
       .then (res => res.json())
       .then(songs => {
         //sorting method that sorts songs by listens property in descending order

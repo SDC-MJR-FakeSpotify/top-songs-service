@@ -1,9 +1,9 @@
 config:
   target: 'http://localhost:3000'
   phases:
-    - duration: 1
-      arrivalRate: 100
+    - duration: 30
+      arrivalRate: 1500
 scenarios:
   - flow:
     - get:
-        url: "/pg/top-songs"
+        url: "/getSongs"
