@@ -36,14 +36,16 @@ class TopSongs extends React.Component {
   }
 
   componentDidMount() {
+
     this.props.songs.map(song => {this.state.audioList.push(song)})
   }
 
   //function called when a song is clicked
+  //possibly do a query here for a song based on id...
   changeSelectedSong(e, song) {
     //console.log('I got clicked!', id)
     this.setState(() => ({
-      selectedSong: song._id
+      selectedSong: song.song_id
     }))
   }
 
@@ -57,14 +59,14 @@ class TopSongs extends React.Component {
   //function that is called when the play button is clicked
   playSong(e, song) {
     //if there is currently a song playing
-    if (song._id !== this.state.playingSong && !this.state.songIsPaused) {
+    if (song.song_id !== this.state.playingSong && !this.state.songIsPaused) {
       //pause current song
       this.audio.pause();
     }
     //update the state with the clicked song's details
     this.setState({
       songIsPaused: false,
-      playingSong: song._id,
+      playingSong: song.song_id,
       audioFile: song.mp3,
       audioIndex: this.state.audioList.indexOf(song)
     }, () => {
@@ -99,11 +101,11 @@ class TopSongs extends React.Component {
       <UnorderedList>
         {this.props.songs.map(song => {
           return (
-            <SongWrapper id="song-wrapper-test"
+            <SongWrapper key={song.song_id} id="song-wrapper-test"
               onClick={((e) => this.changeSelectedSong(e, song))}>
             <Song
               song={song}
-              key={song._id}
+              key={song.song_id}
               playingSong={this.state.playingSong}
               songIsPaused={this.state.songIsPaused}
               selectedSong={this.state.selectedSong}

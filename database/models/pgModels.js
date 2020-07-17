@@ -41,7 +41,14 @@ const Album = sequelize.define('album', {
   },
   artist_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    references: {
+      model: {
+        tableName: 'artists',
+        schema: 'static'
+      },
+      key: 'id'
+    },
+    allowNull: false
   },
   songs: {
     type: DataTypes.ARRAY(DataTypes.STRING), // may need to setup default empty array
@@ -74,11 +81,25 @@ const Song = sequelize.define('song', {
   },
   artist_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    references: {
+      model: {
+        tableName: 'artists',
+        schema: 'static'
+      },
+      key: 'id'
+    },
+    allowNull: false
   },
   album_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    references: {
+      model: {
+        tableName: 'albums',
+        schema: 'static'
+      },
+      key: 'id'
+    },
+    allowNull: false
   },
   featuredArtists: {
     type: DataTypes.ARRAY(DataTypes.STRING), // may need to setup default empty array

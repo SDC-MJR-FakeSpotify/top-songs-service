@@ -34,31 +34,31 @@ const getAlbumQuery = ((pInput, callback) => {
 })
 
 // //gets the top 5 songs by listens
-const getTopFive = function(artist) {
-  var songs = model.Song.findAll({
+const getTopFive = ((albumId, callback) => {
+  model.Song.findAll({
     where: {
-    artist_id: artist,
+    album_id: albumId,
     },
   })
-  console.log("SONGS: ", songs)
-  return songs;
-}
+  .then(data => callback(null, data))
+  .catch(err => callback(err, null))
+})
 
 //get the album artwork
-const getAlbumImage = function(id) {
-  var query = model.Album.findAll({
-    where: {
-      album_id: id
-    }
-  });
-  console.log(query)
-  return query;
-}
+// const getAlbumImage = function(id) {
+//   var query = model.Album.findAll({
+//     where: {
+//       album_id: id
+//     }
+//   });
+//   console.log(query)
+//   return query;
+// }
 
 module.exports = {
   getSongQuery: getSongQuery,
   getAlbumQuery: getAlbumQuery,
   getArtistQuery: getArtistQuery,
   getTopFive: getTopFive,
-  getAlbumImage: getAlbumImage,
+  // getAlbumImage: getAlbumImage,
 }

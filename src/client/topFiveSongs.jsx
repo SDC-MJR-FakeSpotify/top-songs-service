@@ -32,19 +32,30 @@ class TopFiveSongs extends React.Component {
   // currently works to load images but is not async
   componentDidMount() {
     // artist ID goes here, currently staticly rendering one artist
-    fetch("http://localhost:3000/1")
+    fetch("http://localhost:3000/pg/top-songs")
       .then (res => res.json())
       .then(songs => {
-        console.log(songs)
+        //sorting method that sorts songs by listens property in descending order
+        for (let i = 0; i < songs.length; i++) {
+          for (let j = i + 1; j < songs.length; j++) {
+            if (songs[j].listens > songs[i].listens) {
+              let temp = songs[i]
+              songs[i] = songs[j]
+              songs[j] = temp
+            }
+          }
+        }
+        //slice method used for top five songs
+        let topFiveSongs = songs.slice(0, 5)
+        return topFiveSongs
+      })
+      .then(songs => {
         this.setState({
           songs: songs,
           isLoaded: true
         })
       })
   }
-
-
-
 
   //places a popular header on div, and calls TopSongs with the whole array
   render() {

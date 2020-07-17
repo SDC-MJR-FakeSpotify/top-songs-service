@@ -1,4 +1,4 @@
-require('newrelic')
+// require('newrelic')
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -8,6 +8,7 @@ const Promise = require('bluebird');
 const morgan = require('morgan');
 
 require('../database/postgresConfig.js');
+const model = require('../database/models/pgModels.js');
 const pgController = require('./controllers/pgController.js');
 const seed = require('../database/mockData/dataSeed.js');
 
@@ -60,29 +61,15 @@ app.get('/pg/songs', (req, res) => {
 })
 
 app.get('/pg/top-songs', (req, res) => {
-  console.log(`GET received for top 5 songs...`);
-  //rand based off of artist ids
-  let rand = Math.floor(Math.random() * (16000 - 0) + 0)
-  pgController.getTopFive(rand)
-    .then((songs) => {
-      console.log('SONGS: ', songs)
-      res.send(songs)
-      const imageQueries = songs.map((song) => {
-      //   //return the query for the album art
-        return pgController.getAlbumImage(song.album_id)
-      })
-      Promise.all(imageQueries)
-        .then((albums) => {
-          //iterate through albums
-          for (var i = 0; i < albums.length; i++) {
-            //create a key in each song to reference the album art
-            songs[i].image = albums[i].imageUrl
-          }
-          //once for loop ends, send back all the songs
-          res.send(songs)
-        })
-    })
-    .catch((err) => console.log(err))
+  //rand based off of album ids
+  let rand = Math.floor(Math.random() * (400008 - 0) + 0)
+  pgController.getTopFive(rand, (err, data) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send(data)
+    }
+  })
 })
 
 // Get function to initially work through returning an image url by song

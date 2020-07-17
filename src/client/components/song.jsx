@@ -105,9 +105,9 @@ class Song extends React.Component {
   //conditional rendering based on state of props and this
   render() {
     //if this is the playing song
-    if (this.props.song._id === this.props.playingSong) {
+    if (this.props.song.song_id === this.props.playingSong) {
       //if this song is selected or hovered over
-      if (this.state.hover || this.props.song._id === this.props.selectedSong) {
+      if (this.state.hover || this.props.song.song_id === this.props.selectedSong) {
         //playing, selected, song is not paused
         //on click, pause the song
         //icon is pause
@@ -200,14 +200,14 @@ class Song extends React.Component {
           </StyledPlaying>
         )
       }
-    } else if (this.props.song._id !== this.props.playingSong) {
+    } else if (this.props.song.song_id !== this.props.playingSong) {
       //if song is not playing
 
       //not playing, song is selected or hovered
       //on click play the song
       //icon is play button
       //include show options
-      if (this.state.hover || this.props.song._id === this.props.selectedSong) {
+      if (this.state.hover || this.props.song.song_id === this.props.selectedSong) {
         return (
           <StyledSelected id="song-selected"
             onMouseEnter={this.toggleHoverOn}
