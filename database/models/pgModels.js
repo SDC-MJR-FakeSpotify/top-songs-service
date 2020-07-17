@@ -1,72 +1,72 @@
 const { Sequelize, DataTypes, Models } = require('sequelize');
 const sequelize = require('../postgresConfig.js');
 
-const Artist = sequelize.define('artist', {
-  artist_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  bio: {
-    type: DataTypes.TEXT,
-    allowNull: true,
-  },
-  relatedArtists: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
-    allowNull: true,
-  },
-  imageUrl: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  }
-})
+// const Artist = sequelize.define('artist', {
+//   artist_id: {
+//     type: DataTypes.INTEGER,
+//     allowNull: false,
+//     autoIncrement: true,
+//     primaryKey: true,
+//   },
+//   name: {
+//     type: DataTypes.STRING,
+//     allowNull: true,
+//   },
+//   bio: {
+//     type: DataTypes.TEXT,
+//     allowNull: true,
+//   },
+//   relatedArtists: {
+//     type: DataTypes.ARRAY(DataTypes.STRING),
+//     allowNull: true,
+//   },
+//   imageUrl: {
+//     type: DataTypes.STRING,
+//     allowNull: true,
+//   }
+// })
 
-console.log("Artist model configured: ", Artist === sequelize.models.Artist);
+// console.log("Artist model configured: ", Artist === sequelize.models.Artist);
 
-const Album = sequelize.define('album', {
-  album_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  title: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  artist_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: {
-        tableName: 'artists',
-        schema: 'static'
-      },
-      key: 'id'
-    },
-    allowNull: false
-  },
-  songs: {
-    type: DataTypes.ARRAY(DataTypes.STRING), // may need to setup default empty array
-    allowNull: false,
-  },
-  featuredArtists: {
-    type: DataTypes.ARRAY(DataTypes.STRING), // may need to setup default empty array
-    allowNull: false,
-  },
-  type: {
-    type: DataTypes.STRING,
-  },
-  imageUrl: {
-    type: DataTypes.STRING,
-  },
-});
+// const Album = sequelize.define('album', {
+//   album_id: {
+//     type: DataTypes.INTEGER,
+//     allowNull: false,
+//     autoIncrement: true,
+//     primaryKey: true,
+//   },
+//   title: {
+//     type: DataTypes.STRING,
+//     allowNull: true,
+//   },
+//   artist_id: {
+//     type: DataTypes.INTEGER,
+//     references: {
+//       model: {
+//         tableName: 'artists',
+//         schema: 'static'
+//       },
+//       key: 'id'
+//     },
+//     allowNull: false
+//   },
+//   songs: {
+//     type: DataTypes.ARRAY(DataTypes.STRING), // may need to setup default empty array
+//     allowNull: false,
+//   },
+//   featuredArtists: {
+//     type: DataTypes.ARRAY(DataTypes.STRING), // may need to setup default empty array
+//     allowNull: false,
+//   },
+//   type: {
+//     type: DataTypes.STRING,
+//   },
+//   imageUrl: {
+//     type: DataTypes.STRING,
+//   },
+// });
 
-console.log("Album model configured: ", Album === sequelize.models.Album);
+// console.log("Album model configured: ", Album === sequelize.models.Album);
 
 const Song = sequelize.define('song', {
   song_id: {
@@ -81,24 +81,10 @@ const Song = sequelize.define('song', {
   },
   artist_id: {
     type: DataTypes.INTEGER,
-    references: {
-      model: {
-        tableName: 'artists',
-        schema: 'static'
-      },
-      key: 'id'
-    },
     allowNull: false
   },
   album_id: {
     type: DataTypes.INTEGER,
-    references: {
-      model: {
-        tableName: 'albums',
-        schema: 'static'
-      },
-      key: 'id'
-    },
     allowNull: false
   },
   featuredArtists: {
@@ -121,12 +107,16 @@ const Song = sequelize.define('song', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
 });
 
-console.log("Song model configured: ", Song === sequelize.models.Song);
+// sequelize.sync({force:true})
 
 module.exports = {
-  Artist: Artist,
-  Album: Album,
+  // Artist: Artist,
+  // Album: Album,
   Song: Song
 }

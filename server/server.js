@@ -60,9 +60,10 @@ app.get('/pg/songs', (req, res) => {
   })
 })
 
-app.get('/pg/top-songs', (req, res) => {
-  //rand based off of album ids
-  let rand = Math.floor(Math.random() * (400008 - 0) + 0)
+app.get('/top-songs', (req, res) => {
+  //rand based off of artist ids
+  let rand = Math.floor(Math.random() * (400008 - 0) + 0) //albums
+  // let rand = Math.floor(Math.random() * (66737- 48000) + 48000)
   pgController.getTopFive(rand, (err, data) => {
     if (err) {
       res.send(err)
