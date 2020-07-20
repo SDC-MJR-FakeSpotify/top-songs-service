@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server:dev": "nodemon ./server/server.js",
+    "start": "node ./server/server.js webpack -d --watch",
     "babel": "./node_modules/.bin/babel client --out-dir public --presets @babel/preset-react --source-maps inline",
     "react:dev": "webpack -d --watch",
     "test": "jest",
