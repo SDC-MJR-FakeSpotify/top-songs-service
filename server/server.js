@@ -23,6 +23,10 @@ app.use(morgan('dev'));
 //   res.send('Data generated...');
 // })
 
+app.get('/loaderio-94b4a5d6f30dd8dfe86b1710f9400d1b.txt', (req, res) => {
+  res.send('loaderio-94b4a5d6f30dd8dfe86b1710f9400d1b')
+})
+
 app.get('/pg/songs', (req, res) => {
   let rand = Math.floor(Math.random() * (10000000- 7500000) + 7500000)
   console.log(rand)
