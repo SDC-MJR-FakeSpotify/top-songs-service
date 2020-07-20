@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes, Models } = require('sequelize');
 const sequelize = new Sequelize('spotify', 'postgres', 'password', {
+  host: 'ec2-52-53-176-57.us-west-1.compute.amazonaws.com',
   dialect: 'postgres',
 })
 

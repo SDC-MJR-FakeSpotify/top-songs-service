@@ -113,6 +113,7 @@ const Song = sequelize.define('songs', {
   },
 });
 
+//sequelize.sync({force:true})
 module.exports = {
   // Artist: Artist,
   // Album: Album,
