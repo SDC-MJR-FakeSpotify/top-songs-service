@@ -9,7 +9,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['SDC_Top Songs Service'],
+  app_name: ['getSongs Service'],
   /**
    * Your New Relic license key.
    */
