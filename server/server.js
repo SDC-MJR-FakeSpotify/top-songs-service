@@ -37,13 +37,13 @@ app.get('/getSongs', (req, res) => {
 app.get('/:albumId', (req, res) => {
   //rand based off of artist ids
   // let rand = Math.floor(Math.random() * (588284 - 0) + 0) //albums
-  model.Song.findAll({
-    where: {
-    album_id: req.params.albumId,
-    },
+  pgController.getSongs(req.params.albumId, (err, data) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send(data)
+    }
   })
-  .then(data => res.send(data))
-  .catch(err => res.send(err))
 })
 
 app.listen(PORT, (req, res) => {
