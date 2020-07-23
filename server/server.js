@@ -1,7 +1,8 @@
 require('newrelic')
 const express = require('express');
-const PORT = process.env.PORT || 3000;
+const router = express.Router();
 const app = express();
+const PORT = process.env.PORT || 3000;
 const cors = require('cors');
 const path = require('path');
 
@@ -17,25 +18,25 @@ app.use(express.static(path.join(__dirname, "../public")));
 // })
 
 //route for testing
-app.get('/getSongs', (req, res) => {
+router.get('/getSongs', (req, res) => {
   //rand based off of artist ids
   //let rand = Math.floor(Math.random() * (588284 - 0) + 0)
-  pgController.getSongs(200000, (err, data) => {
-    if (err) {
-      res.send(err)
-    } else {
-      res.send(data)
-    }
-  })
-  // model.Song.findAll({
-  //   where: {
-  //     album_id: 200000,
-  //   },
+  // pgController.getSongs(200000, (err, data) => {
+  //   if (err) {
+  //     res.send(err)
+  //   } else {
+  //     res.send(data)
+  //   }
   // })
-  // .then(songs => res.send(songs))
+  model.Song.findAll({
+    where: {
+      album_id: 200000,
+    },
+  })
+  .then(songs => res.send(songs))
 })
 
-app.get('/:albumId', (req, res) => {
+router.get('/:albumId', (req, res) => {
   //rand based off of artist ids
   // let rand = Math.floor(Math.random() * (588284 - 0) + 0) //albums
   pgController.getSongs(req.params.albumId, (err, data) => {
@@ -46,6 +47,8 @@ app.get('/:albumId', (req, res) => {
     }
   })
 })
+
+app.use('/', router);
 
 app.listen(PORT, (req, res) => {
   console.log(`Server is running on PORT: ${PORT}`);
