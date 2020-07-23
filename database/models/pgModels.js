@@ -21,7 +21,7 @@ const Song = sequelize.define('songs', {
     allowNull: false
   },
   featuredArtists: {
-    type: DataTypes.ARRAY(DataTypes.STRING), // may need to setup default empty array
+    type: DataTypes.ARRAY(DataTypes.STRING), 
     allowNull: false,
   },
   mp3: {
